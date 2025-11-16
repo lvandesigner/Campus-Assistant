@@ -1,0 +1,14 @@
+{
+  "src": [
+    "pages/PatternLock",
+    "pages/Index",
+    "pages/MinePage",
+    "pages/AboutPage",
+    "pages/LeaveApplyPage",
+    "pages/LeaveRecordPage",
+    "pages/CoursePage",
+    "pages/NoticeListPage",
+    "pages/CampusMapPage",
+    "pages/ActivityCalendarPage"
+  ]
+}
