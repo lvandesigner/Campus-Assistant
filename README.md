@@ -1,85 +1,164 @@
-# Media — 媒体资源目录
+# 智慧校园 (Smart Campus)
 
-> **路径：** `E:\Harmony\Harmony\Harmony\entry\src\main\resources\base\media`
+基于 **HarmonyOS** 的一站式校园生活服务平台，使用 ArkTS + ArkUI（Stage 模型）开发。
 
-本目录存放应用所需的全部图片/图标资源。**资源修改、替换、新增都在此目录下操作。**
+## 项目信息
 
-## 现有资源文件
+| 项目 | 说明 |
+|------|------|
+| 应用名称 | 智慧校园 |
+| Bundle Name | `com.example.app` |
+| 版本号 | 1.0.0 (versionCode: 1000000) |
+| 目标 SDK | API 9 (HarmonyOS) |
+| 开发模式 | Stage 模型 |
+| 编程语言 | ArkTS (Extended TypeScript) |
+| 支持设备 | Phone |
 
-| 文件名 | 尺寸 | 用途 | 状态 |
-|--------|------|------|------|
-| [icon.png](icon.png) | - | 应用入口图标 / Ability 图标 (`$media:icon`) | ✅ 已有 |
-| [arrow_right.png](arrow_right.png) | - | 列表项右侧箭头 | ✅ 已有 |
-| [arrow_left.png](arrow_left.png) | - | 返回箭头（AboutPage 导航栏使用） | ✅ 已有 |
-| [back.png](back.png) | - | 备用返回图标 | ✅ 已有 |
-| [ic_arrow_down.png](ic_arrow_down.png) | - | 向下箭头 | ✅ 已有 |
-| [course.png](course.png) | - | ⚠️ **通用占位图** — 被多处引用 | 🔄 需替换 |
+## 功能模块
 
-## ⚠️ 关键问题：占位图滥用
+- 🏠 **主页** — 轮播图、滚动通知、功能入口 Grid、底部三 Tab 导航（主页/消息/我的）
+- 📚 **课程表** — 按周切换查看课程详情（含教师、地点、学分、教材、考核方式、作业等）
+- 📝 **请假系统** — 在线请假申请（日期选择 + 理由填写）、请假记录查看
+- 📢 **校园通知** — 通知列表 + 关键词搜索、已读/未读标记
+- 🗺️ **校园地图** — 按分类筛选校园地点、查看地点详情
+- 🎯 **活动中心** — 按日期浏览校园活动、活动报名/取消
+- 🔒 **隐私锁** — 图案密码（PatternLock）设置与验证
+- 👤 **个人中心** — 个人信息展示、请假记录、隐私锁设置、消息通知开关、评分、清除缓存、关于我们
 
-`course.png` 在当前项目中被**大量位置**当作通用占位图引用。请按以下清单逐一替换为正式图片：
+## 项目结构
 
-### 需要新增/替换的资源
-
-| 引用位置 | 代码中的引用 | 建议替换为 | 建议尺寸 |
-|----------|-------------|-----------|----------|
-| 主页 - 轮播图 ×4 | `Index.ets` 中 `bannerImages` 数组 | `banner_01.png` ~ `banner_04.png` | 750×360 |
-| 主页 - 功能图标 ×5 | `Index.ets` 中 `functionItems` | `ic_course.png`、`ic_leave.png`、`ic_notice.png`、`ic_map.png`、`ic_activity.png` | 100×100 |
-| 主页/个人中心 - 用户头像 | `Index.ets` / `MinePage.ets` / `AboutPage.ets` | `avatar_default.png` | 200×200 |
-| 校园地图 - 地图图片 | `CampusMapPage.ets` | `campus_map.png` | 750×500 |
-| 通知列表 - 空状态图 | `NoticeListPage.ets` | `empty_notice.png` | 240×240 |
-| 活动中心 - 小图标 | `ActivityCalendarPage.ets` | `ic_time.png`、`ic_location.png`、`ic_organizer.png` | 32×32 |
-| 课程表 - 空状态图 | `CoursePage.ets` | `empty_course.png` | 240×240 |
-
-### 缺失的 Tab 图标（最紧急！）
-
-代码中 `Index.ets` 的 `TabItem` Builder 引用了以下路径，但**文件不存在**：
-
-| 缺失文件 | 引用方式 | 用途 |
-|----------|----------|------|
-| `/images/home_normal.png` | 字符串路径 | 主页 Tab - 未选中态 |
-| `/images/home_selected.png` | 字符串路径 | 主页 Tab - 选中态 |
-| `/images/message_normal.png` | 字符串路径 | 消息 Tab - 未选中态 |
-| `/images/message_selected.png` | 字符串路径 | 消息 Tab - 选中态 |
-| `/images/mine_normal.png` | 字符串路径 | 我的 Tab - 未选中态 |
-| `/images/mine_selected.png` | 字符串路径 | 我的 Tab - 选中态 |
-
-> **解决方案有两个：**
-> 1. 在 `media/` 目录下添加这 6 张图片，然后在代码中将引用改为 `$r('app.media.xxx')`
-> 2. 或者直接在 `media/` 目录下创建 `images/` 子目录放入对应图片
-
----
-
-## 如何替换资源
-
-### 替换现有图片（保持文件名不变）
-
-直接将新图片覆盖同名文件即可。但 **`course.png` 除外** — 它被多处用作占位图，建议不要直接替换它，而是：
-
-1. 新增各功能对应的图片（如 `ic_course.png`、`banner_01.png` 等）
-2. 修改对应 `.ets` 文件中的 `$r('app.media.course')` 为 `$r('app.media.新文件名')`
-
-### 新增图片
-
-1. 将 `.png` 图片放入本目录
-2. 在代码中通过 `$r('app.media.文件名')` 引用（不带扩展名）
-3. 示例：放入 `my_icon.png` → 代码写 `$r('app.media.my_icon')`
-
-### 资源引用方式
-
-```ts
-// ✅ 推荐：使用 $r() 资源引用
-Image($r('app.media.icon'))
-
-// ❌ 需避免：使用字符串路径（除非是 resources/rawfile 下的文件）
-Image('/images/home_normal.png')  // 文件可能找不到
+```
+Harmony/
+├── AppScope/
+│   └── app.json5                  # 应用全局配置
+├── entry/
+│   └── src/main/
+│       ├── ets/
+│       │   ├── entryability/
+│       │   │   └── EntryAbility.ts # 应用入口 Ability
+│       │   └── pages/              # 📂 所有页面代码（详见该目录 README）
+│       ├── resources/
+│       │   └── base/
+│       │       ├── media/          # 📂 图片资源（详见该目录 README）
+│       │       ├── profile/
+│       │       │   └── main_pages.json  # 页面路由配置
+│       │       ├── element/        # 字符串/颜色资源
+│       │       └── ...
+│       └── module.json5            # 模块配置
+├── build-profile.json5             # 构建配置
+├── oh-package.json5                # 依赖管理
+└── hvigor/                         # 构建工具配置
 ```
 
+## 页面代码位置
+
+> **所有页面代码位于：`E:\Harmony\Harmony\Harmony\entry\src\main\ets\pages`**
+
+该目录下的 10 个页面文件及功能说明，请查看 [pages/README.md](entry/src/main/ets/pages/README.md)。
+
+## 媒体资源位置
+
+> **所有图片/图标资源位于：`E:\Harmony\Harmony\Harmony\entry\src\main\resources\base\media`**
+
+如需替换应用图标、功能图标等，请在该目录下操作。详情请查看 [media/README.md](entry/src/main/resources/base/media/README.md)。
+
 ---
 
-## 注意
+## ⚠️ 使用前必读 — 需要补充和注意的事项
 
-- 所有图片建议使用 **PNG** 格式
-- `$r('app.media.xxx')` 中 `xxx` 不包含 `.png` 扩展名
-- 图片尺寸建议适配手机分辨率（基准 1080×2340）
-- `app_icon` 在 `AppScope/app.json5` 中引用，在 `AppScope/resources/base/media/` 下存放
+### 1. 替换占位图片资源
+
+当前所有图标和图片均使用同一张 `course.png` 作为占位图，**必须替换为正式资源**：
+
+| 引用位置 | 用途 | 需替换为 |
+|----------|------|----------|
+| 主页功能入口 Grid | 课程表、请假申请等 5 个功能图标 | 各功能对应的独立图标 |
+| 主页轮播图 | Banner 图片（4 张） | 校园宣传图/活动海报 |
+| 个人中心头像 | 用户头像 | 默认头像图 |
+| 校园地图 | 地图图片 | 实际校园地图/平面图 |
+| 底部 Tab 图标 | 主页/消息/我的 三 Tab 图标 | 对应的 `home_normal.png`、`home_selected.png` 等 |
+| 关于页面 | 应用图标 | 正式 App 图标 (120x120) |
+| 活动中心列表 | 活动项小图标 | 时间/地点/主办方对应图标 |
+
+> **关键缺失：** 代码中引用了 `/images/home_normal.png`、`/images/home_selected.png`、`/images/message_normal.png`、`/images/message_selected.png`、`/images/mine_normal.png`、`/images/mine_selected.png` 作为 Tab 图标，但这些文件在 `media/` 目录中不存在。请添加这些图片或修改 Index.ets 中的 `TabItem` Builder 引用路径。
+
+具体媒体资源清单和替换说明见 [media/README.md](entry/src/main/resources/base/media/README.md)。
+
+### 2. 未实现的页面（跳转会报错）
+
+以下页面在 `Index.ets` 的消息列表和快捷功能中被引用，但 **尚未创建对应的 .ets 文件**：
+
+| 引用页面 | 触发位置 |
+|----------|----------|
+| `pages/NoticeDetailPage` | 消息 Tab → 点击"校园网络维护通知" |
+| `pages/SportEventPage` | 消息 Tab → 点击"运动会报名" |
+| `pages/LibraryRemindPage` | 消息 Tab → 点击"图书馆借阅到期提醒" |
+| `pages/LeaveDetailPage` | 消息 Tab → 点击"请假审批通过" |
+| `pages/GradeQueryPage` | 消息 Tab → 点击"成绩发布通知" / 我的 Tab → 快捷功能"成绩" |
+| `pages/ClubActivityPage` | 消息 Tab → 点击"社团活动邀请" |
+| `pages/DormitoryPage` | 消息 Tab → 点击"宿舍卫生检查" |
+| `pages/CampusCardPage` | 消息 Tab → 点击"校园卡消费提醒" |
+| `pages/LecturePage` | 消息 Tab → 点击"讲座通知" |
+| `pages/VolunteerPage` | 消息 Tab → 点击"志愿服务报名" |
+| `pages/MyBorrowPage` | 我的 Tab → 快捷功能"借阅" |
+
+**建议：** 要么创建这些缺失的页面文件，要么暂时注释掉对应的跳转逻辑，否则运行时会因路由找不到页面而报错。
+
+### 3. 硬编码数据需要替换为真实接口
+
+以下页面目前使用静态模拟数据，实际使用时需要接入后端 API：
+
+| 文件 | 模拟数据 |
+|------|----------|
+| `Index.ets` | 用户信息（姓名、学号、学院）、统计数据（请假/通知/课程/借阅数量） |
+| `CoursePage.ets` | `courseData` 数组中的所有课程信息 |
+| `LeaveRecordPage.ets` | `leaveRecords` 数组中的请假记录 |
+| `NoticeListPage.ets` | `notices` 数组中的通知列表 |
+| `ActivityCalendarPage.ets` | `activityData` 对象中的所有活动数据 |
+| `MinePage.ets` | 用户头像、姓名、学号、学院、班级信息 |
+| `AboutPage.ets` | 客服电话 (`66666666666`)、邮箱 (`support@xxx.com`)、网址 (`www.xxx.com`) |
+
+### 4. 路由配置
+
+页面路由在 [entry/src/main/resources/base/profile/main_pages.json](entry/src/main/resources/base/profile/main_pages.json) 中注册。**新增页面时必须在此文件中添加对应的路径**，否则无法跳转。
+
+当前已注册的页面：
+```
+pages/PatternLock → pages/Index → pages/MinePage → pages/AboutPage
+→ pages/LeaveApplyPage → pages/LeaveRecordPage → pages/CoursePage
+→ pages/NoticeListPage → pages/CampusMapPage → pages/ActivityCalendarPage
+```
+
+### 5. PatternLock 启动顺序
+
+`EntryAbility.ts` 在 `onCreate` 中将 `isPasswordSet` 初始化为 `false`，并通过 `windowStage.loadContent('pages/Index')` 直接加载主页。如果需要首次启动时强制设置图案密码，需在 Index 页面的 `aboutToAppear` 中添加判断逻辑，当 `isPasswordSet === false` 时自动跳转至 `PatternLockPage`。
+
+### 6. 其他注意事项
+
+- **日期范围：** `LeaveApplyPage.ets` 的 DatePicker 范围为 2024-2025 年，`ActivityCalendarPage.ets` 的活动数据范围为 2025-09 至 2026-01，如实际使用年份不同需要修改。
+- **编译 SDK：** `build-profile.json5` 中 `compileSdkVersion` 和 `compatibleSdkVersion` 均为 9，请确认目标设备支持的 API 版本。
+- **签名配置：** `build-profile.json5` 中 `signingConfigs` 为空数组，构建发布包前需要配置签名。
+- **缓存数据：** 所有数据目前仅存在于内存中（AppStorage），应用重启后会丢失。如需持久化，请接入 `@ohos.data.preferences` 或关系型数据库。
+
+---
+
+## 快速开始
+
+### 环境要求
+
+- DevEco Studio 3.1+ 
+- HarmonyOS SDK API 9+
+- 华为开发者账号（用于签名和调试）
+
+### 运行步骤
+
+1. 使用 DevEco Studio 打开本项目根目录
+2. 在 `File → Project Structure` 中确认 SDK 路径
+3. 连接 HarmonyOS 真机或启动模拟器
+4. 点击 `Run` 按钮编译并运行
+
+---
+
+## 版权
+
+© 2025 nb666 版权所有
