@@ -52,13 +52,13 @@ Harmony/
 
 ## 页面代码位置
 
-> **所有页面代码位于：`E:\Harmony\Harmony\Harmony\entry\src\main\ets\pages`**
+> **所有页面代码位于：`Harmony\entry\src\main\ets\pages`**
 
 该目录下的 10 个页面文件及功能说明，请查看 [pages/README.md](entry/src/main/ets/pages/README.md)。
 
 ## 媒体资源位置
 
-> **所有图片/图标资源位于：`E:\Harmony\Harmony\Harmony\entry\src\main\resources\base\media`**
+> **所有图片/图标资源位于：`Harmony\entry\src\main\resources\base\media`**
 
 如需替换应用图标、功能图标等，请在该目录下操作。详情请查看 [media/README.md](entry/src/main/resources/base/media/README.md)。
 
