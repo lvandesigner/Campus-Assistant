@@ -39,7 +39,7 @@ struct AboutPage {
         Column() {
           // 应用图标和基本信息
           Column() {
-            Image($r('app.media.course'))
+            Image($r('app.media.icon'))
               .size({ width: 120, height: 120 })
               .borderRadius(20)
               .margin({ bottom: 20 })

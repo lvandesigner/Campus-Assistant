@@ -235,9 +235,9 @@ struct ActivityCalendarPage {
       Column() {
         // 时间
         Row() {
-          Image($r('app.media.course'))
-            .size({ width: 16, height: 16 })
-            .margin({ right: 8 })
+          Text('⏰')
+            .fontSize(16)
+            .margin({ right: 6 })
           Text(`时间：${item.time}`)
             .fontSize(14)
             .fontColor('#666')
@@ -247,9 +247,9 @@ struct ActivityCalendarPage {
 
         // 地点
         Row() {
-          Image($r('app.media.course'))
-            .size({ width: 16, height: 16 })
-            .margin({ right: 8 })
+          Text('📍')
+            .fontSize(16)
+            .margin({ right: 6 })
           Text(`地点：${item.location}`)
             .fontSize(14)
             .fontColor('#666')
@@ -259,9 +259,9 @@ struct ActivityCalendarPage {
 
         // 主办方
         Row() {
-          Image($r('app.media.course'))
-            .size({ width: 16, height: 16 })
-            .margin({ right: 8 })
+          Text('🏛️')
+            .fontSize(16)
+            .margin({ right: 6 })
           Text(`主办：${item.organizer}`)
             .fontSize(14)
             .fontColor('#666')

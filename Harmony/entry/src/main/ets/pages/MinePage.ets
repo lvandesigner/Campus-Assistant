@@ -13,7 +13,7 @@ struct MinePage {
     Column() {
       // 顶部个人信息
       Column() {
-        Image($r('app.media.course'))
+        Image($r('app.media.icon'))
           .size({ width: 100, height: 100 })
           .borderRadius(50)
           .margin({ bottom: 15 })

@@ -17,36 +17,34 @@
 
 ## ⚠️ 关键问题：占位图滥用
 
-`course.png` 在当前项目中被**大量位置**当作通用占位图引用。请按以下清单逐一替换为正式图片：
+`course.png` 在当前项目中被**大量位置**当作通用占位图引用。**部分已临时修复**（详见下方状态列），剩余请按以下清单逐一替换为正式图片：
 
 ### 需要新增/替换的资源
 
-| 引用位置 | 代码中的引用 | 建议替换为 | 建议尺寸 |
-|----------|-------------|-----------|----------|
-| 主页 - 轮播图 ×4 | `Index.ets` 中 `bannerImages` 数组 | `banner_01.png` ~ `banner_04.png` | 750×360 |
-| 主页 - 功能图标 ×5 | `Index.ets` 中 `functionItems` | `ic_course.png`、`ic_leave.png`、`ic_notice.png`、`ic_map.png`、`ic_activity.png` | 100×100 |
-| 主页/个人中心 - 用户头像 | `Index.ets` / `MinePage.ets` / `AboutPage.ets` | `avatar_default.png` | 200×200 |
-| 校园地图 - 地图图片 | `CampusMapPage.ets` | `campus_map.png` | 750×500 |
-| 通知列表 - 空状态图 | `NoticeListPage.ets` | `empty_notice.png` | 240×240 |
-| 活动中心 - 小图标 | `ActivityCalendarPage.ets` | `ic_time.png`、`ic_location.png`、`ic_organizer.png` | 32×32 |
-| 课程表 - 空状态图 | `CoursePage.ets` | `empty_course.png` | 240×240 |
+| 引用位置 | 代码中的引用 | 建议替换为 | 建议尺寸 | 状态 |
+|----------|-------------|-----------|----------|------|
+| 主页 - 轮播图 ×4 | `Index.ets` 中 `bannerImages` 数组 | `banner_01.png` ~ `banner_04.png` | 750×360 | 🔄 仍用 course.png |
+| 主页 - 功能图标 ×5 | `Index.ets` 中 `functionItems` | `ic_course.png`、`ic_leave.png`、`ic_notice.png`、`ic_map.png`、`ic_activity.png` | 100×100 | 🔄 仍用 course.png |
+| 主页/个人中心 - 用户头像 | `Index.ets` / `MinePage.ets` / `AboutPage.ets` | `avatar_default.png` | 200×200 | ✅ 已改用 icon.png |
+| 校园地图 - 地图图片 | `CampusMapPage.ets` | `campus_map.png` | 750×500 | 🔄 仍用 course.png |
+| 通知列表 - 空状态图 | `NoticeListPage.ets` | `empty_notice.png` | 240×240 | 🔄 仍用 course.png |
+| 活动中心 - 小图标 | `ActivityCalendarPage.ets` | `ic_time.png`、`ic_location.png`、`ic_organizer.png` | 32×32 | ✅ 已改用 emoji 文字 |
+| 课程表 - 空状态图 | `CoursePage.ets` | `empty_course.png` | 240×240 | 🔄 仍用 course.png |
+| 底部 Tab 图标 ×6 | `Index.ets` 中 `TabItem` Builder | `ic_home_normal.png` 等 6 张 | 64×64 | ✅ 已改用 icon.png 占位 |
 
-### 缺失的 Tab 图标（最紧急！）
+### Tab 图标状态（已临时修复 ✅）
 
-代码中 `Index.ets` 的 `TabItem` Builder 引用了以下路径，但**文件不存在**：
+~~代码中 `Index.ets` 的 `TabItem` Builder 原本引用了不存在的 `/images/home_normal.png` 等字符串路径。~~
 
-| 缺失文件 | 引用方式 | 用途 |
-|----------|----------|------|
-| `/images/home_normal.png` | 字符串路径 | 主页 Tab - 未选中态 |
-| `/images/home_selected.png` | 字符串路径 | 主页 Tab - 选中态 |
-| `/images/message_normal.png` | 字符串路径 | 消息 Tab - 未选中态 |
-| `/images/message_selected.png` | 字符串路径 | 消息 Tab - 选中态 |
-| `/images/mine_normal.png` | 字符串路径 | 我的 Tab - 未选中态 |
-| `/images/mine_selected.png` | 字符串路径 | 我的 Tab - 选中态 |
+**已于 2025-07-04 修复：** Tab 图标已改用 `$r('app.media.icon')`（现有 `icon.png`）作为临时占位，代码可正常编译运行。
 
-> **解决方案有两个：**
-> 1. 在 `media/` 目录下添加这 6 张图片，然后在代码中将引用改为 `$r('app.media.xxx')`
-> 2. 或者直接在 `media/` 目录下创建 `images/` 子目录放入对应图片
+**正式替换时：** 准备 6 张 Tab 图标（建议 64×64），放入 `media/` 目录，然后在 `Index.ets` 中将 `$r('app.media.icon')` 替换为对应的资源引用：
+
+| Tab | 未选中态 | 选中态 |
+|-----|---------|--------|
+| 主页 | `$r('app.media.icon')` → `$r('app.media.ic_home_normal')` | → `$r('app.media.ic_home_selected')` |
+| 消息 | `$r('app.media.icon')` → `$r('app.media.ic_message_normal')` | → `$r('app.media.ic_message_selected')` |
+| 我的 | `$r('app.media.icon')` → `$r('app.media.ic_mine_normal')` | → `$r('app.media.ic_mine_selected')` |
 
 ---
 

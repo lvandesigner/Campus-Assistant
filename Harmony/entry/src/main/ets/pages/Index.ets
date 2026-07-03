@@ -26,8 +26,8 @@ struct Index {
 
   @Builder TabItem(
     title: string,
-    iconNormal: string,
-    iconSelected: string,
+    iconNormal: Resource,
+    iconSelected: Resource,
     targetIndex: number
   ) {
     Column() {
@@ -143,7 +143,7 @@ struct Index {
         .backgroundColor('#F5F5F5')
         .justifyContent(FlexAlign.Start)
       }
-      .tabBar(this.TabItem('主页', '/images/home_normal.png', '/images/home_selected.png', 0))
+      .tabBar(this.TabItem('主页', $r('app.media.icon'), $r('app.media.icon'), 0))
 
       // 2. 消息Tab
       TabContent() {
@@ -427,7 +427,7 @@ struct Index {
           .divider({ strokeWidth: 1, color: '#F5F5F5' })
         }
       }
-      .tabBar(this.TabItem('消息', '/images/message_normal.png', '/images/message_selected.png', 1))
+      .tabBar(this.TabItem('消息', $r('app.media.icon'), $r('app.media.icon'), 1))
 
       // 3. 我的Tab - 修改这个部分，确保个人中心入口在可视区域
       TabContent() {
@@ -479,7 +479,7 @@ struct Index {
             Column() {
               // 头像和基本信息
               Row() {
-                Image($r('app.media.course'))
+                Image($r('app.media.icon'))
                   .size({ width: 60, height: 60 })
                   .borderRadius(30)
                   .border({ width: 2, color: '#007DFF' })
@@ -693,7 +693,7 @@ struct Index {
         .height('100%')
         .backgroundColor('#F0F0F0')
       }
-      .tabBar(this.TabItem('我的', '/images/mine_normal.png', '/images/mine_selected.png', 2))
+      .tabBar(this.TabItem('我的', $r('app.media.icon'), $r('app.media.icon'), 2))
     }
     .onChange((index) => {
       this.currentIndex = index;

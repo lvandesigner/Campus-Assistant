@@ -68,19 +68,20 @@ Harmony/
 
 ### 1. 替换占位图片资源
 
-当前所有图标和图片均使用同一张 `course.png` 作为占位图，**必须替换为正式资源**：
+当前多处图标和图片使用 `course.png` 作为占位图，**部分已临时修复**（标记 ✅），剩余需替换为正式资源：
 
-| 引用位置 | 用途 | 需替换为 |
-|----------|------|----------|
-| 主页功能入口 Grid | 课程表、请假申请等 5 个功能图标 | 各功能对应的独立图标 |
-| 主页轮播图 | Banner 图片（4 张） | 校园宣传图/活动海报 |
-| 个人中心头像 | 用户头像 | 默认头像图 |
-| 校园地图 | 地图图片 | 实际校园地图/平面图 |
-| 底部 Tab 图标 | 主页/消息/我的 三 Tab 图标 | 对应的 `home_normal.png`、`home_selected.png` 等 |
-| 关于页面 | 应用图标 | 正式 App 图标 (120x120) |
-| 活动中心列表 | 活动项小图标 | 时间/地点/主办方对应图标 |
+| 引用位置 | 用途 | 需替换为 | 状态 |
+|----------|------|----------|------|
+| 主页功能入口 Grid | 课程表、请假申请等 5 个功能图标 | 各功能对应的独立图标 | 🔄 待替换 |
+| 主页轮播图 | Banner 图片（4 张） | 校园宣传图/活动海报 | 🔄 待替换 |
+| 个人中心头像 | 用户头像（Index/MinePage/AboutPage） | 默认头像图 | ✅ 已改用 icon.png |
+| 校园地图 | 地图图片 | 实际校园地图/平面图 | 🔄 待替换 |
+| 底部 Tab 图标 | 主页/消息/我的 三 Tab 图标 | `ic_home_normal.png` 等 6 张 | ✅ 已改用 icon.png 占位 |
+| 关于页面 | 应用图标 (120x120) | 正式 App 图标 | ✅ 已改用 icon.png |
+| 活动中心列表 | 活动项小图标 | 时间/地点/主办方对应图标 | ✅ 已改用 emoji 文字 |
+| 空状态图 | NoticeListPage / CoursePage | 空状态插画 | 🔄 待替换 |
 
-> **关键缺失：** 代码中引用了 `/images/home_normal.png`、`/images/home_selected.png`、`/images/message_normal.png`、`/images/message_selected.png`、`/images/mine_normal.png`、`/images/mine_selected.png` 作为 Tab 图标，但这些文件在 `media/` 目录中不存在。请添加这些图片或修改 Index.ets 中的 `TabItem` Builder 引用路径。
+> **已修复：** 2025-07-04 修复了底部 Tab 图标引用（原为不存在的 `/images/` 字符串路径，现已改用 `$r('app.media.icon')` 占位）、用户头像（改用 `icon.png`）、活动中心小图标（改用 emoji）、关于页面图标（改用 `icon.png`），项目可正常编译运行。
 
 具体媒体资源清单和替换说明见 [media/README.md](entry/src/main/resources/base/media/README.md)。
 
@@ -161,4 +162,4 @@ pages/PatternLock → pages/Index → pages/MinePage → pages/AboutPage
 
 ## 版权
 
-© 2025 nb666 版权所有
+© 2025 yszaygr2138 & lvan_smith 版权所有
